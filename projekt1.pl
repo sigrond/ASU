@@ -26,13 +26,33 @@ close(DATA);
 my @matrix;
 my $width=0;
 my $height=0;
+my @row;
+my $row_it=0;
 
 foreach(@lines)
 {
 	my @line=split(/ /,$_);
-	push @{ $matrix[$height] }, @line;
-	$width=max($width,scalar @line);
-	$height++;
+	if($cols>0)
+	{
+		for(my $i=0;$i<scalar @line;$i++)
+		{
+			$row[$row_it]=$line[$i];
+			$row_it++;
+			if($row_it>=$cols)
+			{
+				$row_it=0;
+				push @{ $matrix[$height] }, @row;
+				$width=$cols;
+				$height++;
+			}
+		}
+	}
+	else
+	{
+		push @{ $matrix[$height] }, @line;
+		$width=max($width,scalar @line);
+		$height++;
+	}
 }
 
 #print "width: $width, height: $height\n";
