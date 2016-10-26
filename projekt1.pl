@@ -9,6 +9,16 @@ use List::Util qw[min max];
 use Getopt::Long;
 use Scalar::Util qw(looks_like_number);
 
+
+my $transpose=0;
+my $sum_up_rows=0;
+my $cols=0;
+GetOptions('transpose' => \$transpose, 
+			'sum_up_rows' => \$sum_up_rows,
+			'cols=i' => \$cols
+			) or die "Usage: $0 --transpose --sum_up_rows --cols i\n";
+
+
 open(DATA,"<test.txt") or die "Couldn't open file test.txt, $!";
 my @lines=<DATA>;
 close(DATA);
@@ -26,10 +36,6 @@ foreach(@lines)
 }
 
 #print "width: $width, height: $height\n";
-
-my $transpose=0;
-my $sum_up_rows=0;
-GetOptions('transpose' => \$transpose, 'sum_up_rows' => \$sum_up_rows) or die "Usage: $0 --transpose --sum_up_rows\n";
 
 #print $transpose."\n";
 if($transpose)
