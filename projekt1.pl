@@ -32,6 +32,7 @@ my $width=0;
 my $height=0;
 my @row;
 my $row_it=0;
+my $line_counter=0;
 
 foreach(@lines)
 {
@@ -49,6 +50,15 @@ foreach(@lines)
 				$width=$cols;
 				$height++;
 			}
+			elsif($i==$#line and $#lines<=$line_counter)
+			{
+				for(my $j=$row_it;$j<$width;$j++)
+				{
+					$row[$j]='';
+				}
+				push @{ $matrix[$height] }, @row;
+				$height++;
+			}
 		}
 	}
 	else
@@ -57,6 +67,7 @@ foreach(@lines)
 		$width=max($width,scalar @line);
 		$height++;
 	}
+	$line_counter++;
 }
 
 #print "width: $width, height: $height\n";
