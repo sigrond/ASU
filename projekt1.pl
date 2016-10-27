@@ -9,17 +9,21 @@ use List::Util qw[min max];
 use Getopt::Long;
 use Scalar::Util qw(looks_like_number);
 
-
+my $filename="test.txt";
 my $transpose=0;
 my $sum_up_rows=0;
+my $sum_up_cols=0;
 my $cols=0;
-GetOptions('transpose' => \$transpose, 
+GetOptions(
+			'filename=s' => \$filename,
+			'transpose' => \$transpose, 
 			'sum_up_rows' => \$sum_up_rows,
+			'sum_up_cols' => \$sum_up_cols,
 			'cols=i' => \$cols
-			) or die "Usage: $0 --transpose --sum_up_rows --cols i\n";
+			) or die "Usage: $0 --filename file --transpose --sum_up_rows --sum_up_cols --cols i\n";
 
 
-open(DATA,"<test.txt") or die "Couldn't open file test.txt, $!";
+open(DATA,"<".$filename) or die "Couldn't open file $filename, $!";
 my @lines=<DATA>;
 close(DATA);
 
@@ -89,7 +93,7 @@ for(my $i=0;$i<$height;$i++)
 			if(looks_like_number($matrix[$j]->[$i]))
 			{
 				$row_sum+=$matrix[$j]->[$i];
-				$col_sum[$i]=$matrix[$j]->[$i];
+				$col_sum[$j]+=$matrix[$j]->[$i];
 			}
 			print $matrix[$j]->[$i];
 		}
@@ -98,7 +102,7 @@ for(my $i=0;$i<$height;$i++)
 			if(looks_like_number($matrix[$i]->[$j]))
 			{
 				$row_sum+=$matrix[$i]->[$j];
-				$col_sum[$i]=$matrix[$i]->[$j];
+				$col_sum[$j]+=$matrix[$i]->[$j];
 			}
 			print $matrix[$i]->[$j];
 		}
@@ -109,6 +113,23 @@ for(my $i=0;$i<$height;$i++)
 		elsif($sum_up_rows)
 		{
 			print " & ".$row_sum;
+		}
+	}
+	print "\\\\\n";
+}
+if($sum_up_cols)
+{
+	print '\hline'."\n";
+	for(my $j=0;$j<$width;$j++)
+	{
+		print $col_sum[$j];
+		if($j<($width-1))
+		{
+			print " & ";
+		}
+		elsif($sum_up_rows)
+		{
+			print " & ";
 		}
 	}
 	print "\\\\\n";
