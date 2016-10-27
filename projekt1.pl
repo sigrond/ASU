@@ -9,19 +9,35 @@ use List::Util qw[min max];
 use Getopt::Long;
 use Scalar::Util qw(looks_like_number);
 
+sub handle_escapes
+{
+	my ($s) = @_;
+	$s =~ s/\\([\\a-z])/
+	$1 eq '\\' ? '\\' :
+    $1 eq 'n' ? "\n" :
+    do { warn("Unrecognised escape \\$1"); "\\$1" }
+	/seg;
+	return $s;
+}
+
 my $filename="test.txt";
 my $transpose=0;
 my $sum_up_rows=0;
 my $sum_up_cols=0;
 my $cols=0;
+my $separators=" ";
 GetOptions(
 			'filename=s' => \$filename,
 			'transpose' => \$transpose, 
 			'sum_up_rows' => \$sum_up_rows,
 			'sum_up_cols' => \$sum_up_cols,
-			'cols=i' => \$cols
-			) or die "Usage: $0 --filename file --transpose --sum_up_rows --sum_up_cols --cols i\n";
+			'cols=i' => \$cols,
+			'separators=s' => \$separators
+			) or die "Usage: $0 --filename file --transpose --sum_up_rows --sum_up_cols --cols i --separators separators\n";
 
+#print "separators before: {".$separators."}\n";
+$separators=handle_escapes($separators);
+#print "separators after: {".$separators."}\n";
 
 open(DATA,"<".$filename) or die "Couldn't open file $filename, $!";
 my @lines=<DATA>;
@@ -36,7 +52,7 @@ my $line_counter=0;
 
 foreach(@lines)
 {
-	my @line=split(/ /,$_);
+	my @line=split(/$separators/,$_);
 	if($cols>0)
 	{
 		for(my $i=0;$i<scalar @line;$i++)
