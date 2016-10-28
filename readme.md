@@ -18,7 +18,7 @@ w pliku wierszami umieścić w kolumnach).
 - Wydrukowanie zadanej tabeli w formacie dla latex na standardowe wyjście.
 
 #Przykładowe wywołanie:
-'
+```Shell
 ./projekt1.pl --filename test3.txt --separators=";" --cols 3 --sum_up_cols --sum_up_rows --empty_row_header --empty_col_header --transpose
 \documentclass{article}
 \begin{document}
@@ -36,10 +36,10 @@ w pliku wierszami umieścić w kolumnach).
 \end{tabular}
 \end{document}
 
-'
+```
 
 Narysowanie tabelki w pdf'ie:
-'
+```Shell
 ./projekt1.pl --filename test3.txt --separators=";" --cols 3 --sum_up_cols --sum_up_rows --empty_row_header --empty_col_header --transpose > t3.tex
 pdflatex t3.tex
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Cygwin) (preloaded format=pdflatex)
@@ -56,4 +56,4 @@ type1/public/amsfonts/cm/cmr10.pfb>
 Output written on t3.pdf (1 page, 11147 bytes).
 Transcript written on t3.log.
 
-'
+```
