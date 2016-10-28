@@ -14,7 +14,7 @@ use List::Util qw[min max];
 use Getopt::Long;
 use Scalar::Util qw(looks_like_number);
 
-## znaleziona w internecie funkcja pozwalająca zamieńić \n na znak końca linii
+## znaleziona w internecie funkcja pozwalająca zamienić \n na znak końca linii
 sub handle_escapes
 {
 	my ($s) = @_;
