@@ -1,14 +1,14 @@
-###ASU projekt 1, zadanie 8 - tabelki
+#ASU projekt 1, zadanie 8 - tabelki
 Autor: Tomasz Jakubczyk
 
-#Zadanie:
+##Zadanie:
 Proszę napisać skrypt do tworzenia tabelek w LaTeXu: z pliku z liczbami odzielonymi jakimiś separatorami
 (spacje, nowe wiersze, średniki — zbiór sep. powinien być definiowalny) zrobić tabelkę
 o zadanej liczbie kolumn. Dokładać (włączane przez opcje) podsumowanie w wierszach, kolumnach,
 puste nagłówki wierszy i kolumn. Zapewnić możliwość obrócenia tabeli o 90 stopni (tzn. dane podane
 w pliku wierszami umieścić w kolumnach).
 
-#Zaimplementowane funkcjonalności:
+##Zaimplementowane funkcjonalności:
 - Wczytanie pliku o zadanej nazwie. Opcja --filename .
 - Zadanie listy separatorów. Może być wyrażenie regularne (czy coś w tym stylu). Opcja --separators .
 - Zadanie liczby kolumn. Może być liczba opcją --cols , lub można kolumny odzielać wybranym separatorem a wiersze znakiem końca linii.
@@ -17,7 +17,7 @@ w pliku wierszami umieścić w kolumnach).
 - Możliwość obrucenia tabeli o 90 opcją --transpose . Obrócenie jest rzeczywiście obróceniem (a nie wczytaniem danych do tabeli w innej kolejności) czyli po tej operacji zadana liczba kolumn jest liczbą wierszy.
 - Wydrukowanie zadanej tabeli w formacie dla latex na standardowe wyjście.
 
-#Przykładowe wywołanie:
+##Przykładowe wywołanie:
 ```Shell
 ./projekt1.pl --filename test3.txt --separators=";" --cols 3 --sum_up_cols --sum_up_rows --empty_row_header --empty_col_header --transpose
 \documentclass{article}
@@ -38,7 +38,7 @@ w pliku wierszami umieścić w kolumnach).
 
 ```
 
-Narysowanie tabelki w pdf'ie:
+###Narysowanie tabelki w pdf'ie:
 ```Shell
 ./projekt1.pl --filename test3.txt --separators=";" --cols 3 --sum_up_cols --sum_up_rows --empty_row_header --empty_col_header --transpose > t3.tex
 pdflatex t3.tex
